@@ -15,15 +15,24 @@ function App() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-        const { data, error } = await supabase
-            .from('posts')
-            .select('*');
+      console.log(searchTerm);
+        const { data, error } = searchTerm === null || searchTerm === '' ?
+          await supabase
+          .from('posts')
+          .select('*') 
+          :
+          await supabase
+          .from('posts')
+          .select('*')
+          .ilike('title', '%' + searchTerm + '%');
         
         setPosts(data);
     };
 
     fetchPosts();
-}, [])
+  }, [searchTerm]);
+
+  
 
   return (
     <div className='postHolder'>

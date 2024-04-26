@@ -30,7 +30,7 @@
   width: 20em;
 }
 
-.editPost input[type="text"] {
+.editPost, .createPost input[type="text"] {
   padding: 0.5em;
   border: none;
   background-color: white; /* Darker teal/blue background color for input */
@@ -95,9 +95,15 @@ input[type="submit"]:hover {
   border-radius: 2em;
 }
 
+
 .post {
-  height: 18em;
-  width: 18em;
+  height: 20em;
+  width: 20em;
+}
+
+.postDetail {
+  height: 20em;
+  width: 30em;
 }
 
 .post, .postDetail {
