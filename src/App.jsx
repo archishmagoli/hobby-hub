@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import { supabase } from './client';
 import './App.css'
+import { useOutletContext, Link } from 'react-router-dom';
+import { intlFormatDistance } from 'date-fns';
+
+export const getRelativeDate = (given_date) => {
+  const timeString = intlFormatDistance(given_date, new Date());
+  return timeString;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [searchTerm, setSearchTerm] = useOutletContext();
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+        const { data, error } = await supabase
+            .from('posts')
+            .select('*');
+        
+        setPosts(data);
+    };
+
+    fetchPosts();
+}, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='postHolder'>
+      {
+        posts === null || posts.length === 0 ?
+        <div>
+            <h2>No posts yet!</h2>
+        </div>
+        :
+        posts.map(post =>
+            <div key={post.id} className='post'>
+                <p>{getRelativeDate(post.created_at)}</p>
+                <h2><b>{post.title}</b></h2>
+                <p>{post.content}</p>
+                <p>{post.upvotes} upvotes</p>
+                <Link to={"/hobby-hub/details/" + post.id}>
+                  <button className='button'>
+                      See More 
+                  </button>
+              </Link>
+            </div>
+        )
+    }
+    </div>
   )
 }
 
-export default App
+export default App;

@@ -5,38 +5,129 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar {
+  display: flex; /* Use flexbox for positioning */
+  justify-content: space-between; /* Distribute items evenly with space between them */
+  align-items: center; /* Align items vertically */
+  background-color: #004d4d; /* Dark teal/blue background color */
+  position: fixed; /* Fix the navbar at the top of the page */
+  top: 0; /* Distance from the top of the page */
+  left: 0; /* Align navbar to the left */
+  right: 0; /* Align navbar to the right */
+  width: 100%; /* Take full width of the page */
+  padding: 0.5em; /* Padding for the navbar */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.navbar input[type="text"] {
+  padding: 0.75em;
+  border: none;
+  border-radius: 2em;
+  background-color: white; /* Darker teal/blue background color for input */
+  color: black; /* Text color for input */
+  font-family: inherit; /* Change font type */
+  font-size: inherit;
+  margin-left: 35%;
+  width: 20em;
 }
 
-.card {
-  padding: 2em;
+.editPost input[type="text"] {
+  padding: 0.5em;
+  border: none;
+  background-color: white; /* Darker teal/blue background color for input */
+  color: black; /* Text color for input */
+  font-family: inherit; /* Change font type */
+  font-size: inherit;
+  width: 20em;
+  margin: 1em;
+  border-radius: 0.25em;
 }
 
-.read-the-docs {
-  color: #888;
+.spacing {
+  height: 5em;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.navbar .links {
+  margin-left: 1em; /* Add margin to separate links from the right */
+  margin-right: 1.5em;
+}
+
+.navbar a {
+  color: #f0f0f0; /* Light text color */
+  text-decoration: none; /* Remove default underline */
+}
+
+.navbar a:hover {
+  background-color: #0aa8a8; /* Dark teal/blue background color on hover */
+  color: #fff; /* White text color on hover */
+  padding: 0.5em;
+  border-radius: 0.5em;
+  transition: background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+.searchForm {
+  display: flex;
+  width: 50em;
+}
+
+input[type="submit"] {
+  border: none;
+  border-radius: 2em;
+  padding: 0.5em;
+  width: 8em;
+  background-color: #1a6e6e; /* Teal background color for button */
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add transition for hover effect */
+  margin-left: 1em;
+}
+
+input[type="submit"]:hover {
+  background-color: #0aa8a8; /* Dark teal/blue background color on hover */
+  color: #fff; /* White text color on hover */
+  padding: 0.5em;
+  border-radius: 2em;
+}
+
+.post {
+  height: 18em;
+  width: 18em;
+}
+
+.post, .postDetail {
+  border: 1px solid white;
+  margin: 1em;
+  overflow: auto;
+  padding: 1em;
+}
+
+.postHolder {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button {
+  font-size: inherit;
+  font-family: inherit;
+  background-color: #004d4d
+}
+
+.button:hover {
+  background-color: #0aa8a8;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+.button-danger {
+  background-color: #D9534F;
+}
+
+.button-info {
+  background-color: #2E86C1;
 }
