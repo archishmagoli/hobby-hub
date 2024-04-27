@@ -117,17 +117,37 @@ input[type="submit"]:hover {
   height: 20em;
 }
 
+.button-sort-clicked {
+  font-size: inherit;
+  font-family: inherit;
+  background-color: #2E86C1;
+  margin: 0.5em
+}
+
+.button-sort-unclicked {
+  font-size: inherit;
+  font-family: inherit;
+  background-color: #1a6e6e;
+  margin: 0.5em
+}
+
+.button-sort:hover {
+  background-color: #0aa8a8;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
 .button {
   font-size: inherit;
   font-family: inherit;
   background-color: #004d4d;
-  margin-right: 0.5em
+  margin: 0.5em
 }
 
 .button:hover {
   background-color: #0aa8a8;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Add transition for hover effect */
+  transition: background-color 0.3s ease; 
 }
 
 .button-danger {

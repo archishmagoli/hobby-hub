@@ -12,29 +12,106 @@ export const getRelativeDate = (given_date) => {
 function App() {
   const [searchTerm, setSearchTerm] = useOutletContext();
   const [posts, setPosts] = useState(null);
+  const [recentClicked, setRecentClicked] = useState(false);
+  const [popularClicked, setPopularClicked] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
-        const { data, error } = searchTerm === null || searchTerm === '' ?
-          await supabase
-          .from('posts')
-          .select('*') 
-          :
-          await supabase
-          .from('posts')
-          .select('*')
-          .ilike('title', '%' + searchTerm + '%');
-        
-        setPosts(data);
+        let orderClause = null;
+
+        if (recentClicked) {
+          orderClause = ('created_at', {ascending: false});
+        } else if (popularClicked) {
+          orderClause = ('upvotes', {ascending: false});
+        }
+
+        if (searchTerm === null || searchTerm === '') {
+          if (orderClause == null) {
+            try {
+              const { data, error } = await supabase
+                  .from('posts')
+                  .select('*');
+
+              setPosts(data);
+            } catch (error) {
+              error = err.message;
+            }
+          } else {
+            try {
+              if (recentClicked) {
+                const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .order('created_at', {ascending: false});
+                setPosts(data);
+              } else {
+                const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .order('upvotes', {ascending: false});
+                setPosts(data);
+              }
+            } catch (error) {
+              error = err.message;
+            }
+          }
+        } else {
+          if (orderClause == null) {
+            try {
+              const { data, error } = await supabase
+                  .from('posts')
+                  .select('*')
+                  .ilike('title', '%' + searchTerm + '%');
+
+              setPosts(data);
+            } catch (err) {
+                error = err.message;
+            }
+          } else {
+            try {
+              if (recentClicked) {
+                const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .ilike('title', '%' + searchTerm + '%')
+                .order('created_at', {ascending: false});
+                setPosts(data);
+              } else {
+                const { data, error } = await supabase
+                .from('posts')
+                .select('*')
+                .ilike('title', '%' + searchTerm + '%')
+                .order('upvotes', {ascending: false});
+                setPosts(data);
+              }
+            } catch (error) {
+              error = err.message;
+            }
+          }
+        }
     };
 
     fetchPosts();
-  }, [searchTerm]);
+  }, [searchTerm, recentClicked, popularClicked]);
 
-  
+  const handleClick = (e) => {
+    if (e.target.id === 'recent') {
+      setRecentClicked(!recentClicked);
+      setPopularClicked(false);
+    } else {
+      setRecentClicked(false);
+      setPopularClicked(!popularClicked);
+    }
+  }
 
   return (
-    <div className='postHolder'>
+    <>
+      <div>
+        Sort By: 
+        <button className={`button-sort-${recentClicked ? 'clicked' : 'unclicked'}`} id='recent' onClick={handleClick}>Most Recent</button>
+        <button className={`button-sort-${popularClicked ? 'clicked' : 'unclicked'}`} id='popular' onClick={handleClick}>Most Popular</button>
+      </div>
+      <div className='postHolder'>
       {
         posts === null || posts.length === 0 ?
         <div>
@@ -54,8 +131,10 @@ function App() {
               </Link>
             </div>
         )
-    }
-    </div>
+      }
+      </div>
+    </>
+    
   )
 }
 
