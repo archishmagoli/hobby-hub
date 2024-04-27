@@ -9,6 +9,7 @@ const DetailView = () => {
     let params = useParams();
     const [post, setPost] = useState(null);
     const [upvotes, setUpvotes] = useState(0);
+    const [comments, setComments] = useState([]);
 
     const fetchPost = async () => {
         const { data, error } = await supabase
@@ -18,11 +19,12 @@ const DetailView = () => {
         
         setPost(data[0]);
         setUpvotes(data[0].upvotes);
+        setComments(data[0].comments);
     };
 
     useEffect(() => {
         fetchPost();
-    }, [upvotes]);
+    }, [upvotes, comments]);
 
     
     const deletePost = async (e) => {
@@ -48,10 +50,10 @@ const DetailView = () => {
     const increaseUpvote = (e) => {
         e.preventDefault();
         setUpvotes(upvotes + 1);
-        updateDatabase(upvotes + 1);
+        databaseUpvotes(upvotes + 1);
     };
 
-    const updateDatabase = async (updatedUpvotes) => {
+    const databaseUpvotes = async (updatedUpvotes) => {
         try {
             const { error } = await supabase
             .from('posts')
@@ -63,6 +65,35 @@ const DetailView = () => {
             alert('Something went wrong, please try again.');
         }
     }
+
+    const databaseComments = async (updatedComments) => {
+        try {
+            const { error } = await supabase
+            .from('posts')
+            .update({ 
+                      comments: updatedComments
+                    })
+            .eq('id', params.id)
+        } catch (error) {
+            alert('Something went wrong, please try again.');
+        }
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+        setPost({
+            ...post,
+            [name]: name === 'comments' ? [...post.comments] : value
+        });
+    };
+
+    const addComment = (e) => {
+        e.preventDefault();
+        setComments([...comments, e.target.elements.comments.value]);
+        databaseComments([...comments, e.target.elements.comments.value]);
+        e.target.elements.comments.value = '';
+    }
     
     return (
         <div>
@@ -71,8 +102,10 @@ const DetailView = () => {
                     <p>{getRelativeDate(post.created_at)}</p>
                     <h2><b>{post.title}</b></h2>
                     <p>{post.content}</p>
-                    <p>{post.upvotes} upvotes</p>
-                    <img src={post.image_url} className='image'></img>
+                    <p>Upvotes: {post.upvotes}</p>
+                    {post.image_url !== null ? 
+                        <img src={post.image_url} className='image'></img> : null
+                    }
                     <br></br>
                     <br></br>
                     <button className='button' onClick={increaseUpvote}>
@@ -85,7 +118,16 @@ const DetailView = () => {
                     </Link>
                     <button className='button button-danger' 
                         onClick={deletePost}>
-                        🗑️</button>
+                        🗑️
+                    </button>
+                    <h3>Comments</h3>
+                    {post.comments !== null ? post.comments.map(comment => <p key={comment}>{comment}</p>) : null}
+
+                    <form onSubmit={addComment}>
+                        <input type="text" id="comments" name="comments" placeholder='Leave a comment...' onChange={handleChange} />
+                        <input className='button button-submit' type="submit" value="Add Comment" />
+                    </form>
+                    
                 </div>
             ) : (
                 <p>Loading...</p>
