@@ -124,7 +124,7 @@ function App() {
                 <h2><b>{post.title}</b></h2>
                 <p>{post.content}</p>
                 <p>{post.upvotes} upvotes</p>
-                <Link to={"/hobby-hub/details/" + post.id}>
+                <Link to={"/details/" + post.id}>
                   <button className='button'>
                       See More 
                   </button>

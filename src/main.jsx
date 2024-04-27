@@ -12,11 +12,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/hobby-hub" element={<Layout />}>
-          <Route index={true} path='/hobby-hub' element={<App />} />
-          <Route index={false} path="/hobby-hub/create" element={<CreatePost />} />
-          <Route index={false} path="/hobby-hub/details/:id" element={<DetailView />} />
-          <Route index={false} path="/hobby-hub/details/:id/edit" element={<EditPost />} />
+        <Route path="/" element={<Layout />}>
+          <Route index={true} path='/' element={<App />} />
+          <Route index={false} path="/create" element={<CreatePost />} />
+          <Route index={false} path="/details/:id" element={<DetailView />} />
+          <Route index={false} path="/details/:id/edit" element={<EditPost />} />
         </Route>
       </Routes>
     </BrowserRouter>

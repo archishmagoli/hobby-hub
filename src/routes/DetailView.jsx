@@ -111,7 +111,7 @@ const DetailView = () => {
                     <button className='button' onClick={increaseUpvote}>
                         👍
                     </button>
-                    <Link to={"/hobby-hub/details/" + post.id + '/edit'}>
+                    <Link to={"/details/" + post.id + '/edit'}>
                         <button className='button button-info'>
                             ✍️
                         </button>

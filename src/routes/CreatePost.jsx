@@ -34,7 +34,7 @@ const CreatePost = () => {
             }
     
             alert('Post created successfully!', data);
-            window.location = '/hobby-hub/'
+            window.location = '/'
         } catch (error) {
             alert('Error creating post. Remember that your post MUST have a title.');
         }

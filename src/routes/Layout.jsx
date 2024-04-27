@@ -22,12 +22,12 @@ const Layout = () => {
             
             <nav>
               <div className="links">
-                  <Link style={{ color: "white" }} to="/hobby-hub">
+                  <Link style={{ color: "white" }} to="/">
                     Home
                   </Link>
               </div>
               <div className="links">
-                  <Link style={{ color: "white" }} to="/hobby-hub/create">
+                  <Link style={{ color: "white" }} to="/create">
                     Create a New Post
                   </Link>
               </div>

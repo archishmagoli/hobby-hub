@@ -48,7 +48,7 @@ const EditPost = () => {
             }
     
             alert('Post updated successfully!');
-            window.location = '/hobby-hub/'
+            window.location = '/'
         } catch (error) {
             alert('Error updating post.');
         }
