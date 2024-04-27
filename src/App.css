@@ -30,7 +30,7 @@
   width: 20em;
 }
 
-.editPost, .createPost input[type="text"] {
+.editPost input[type="text"], .createPost input[type="text"] {
   padding: 0.5em;
   border: none;
   background-color: white; /* Darker teal/blue background color for input */
@@ -101,11 +101,6 @@ input[type="submit"]:hover {
   width: 20em;
 }
 
-.postDetail {
-  height: 20em;
-  width: 30em;
-}
-
 .post, .postDetail {
   border: 1px solid white;
   margin: 1em;
@@ -118,10 +113,15 @@ input[type="submit"]:hover {
   flex-wrap: wrap;
 }
 
+.image {
+  height: 20em;
+}
+
 .button {
   font-size: inherit;
   font-family: inherit;
-  background-color: #004d4d
+  background-color: #004d4d;
+  margin-right: 0.5em
 }
 
 .button:hover {

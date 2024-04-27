@@ -39,6 +39,7 @@ const EditPost = () => {
             .update({ name: post.name,
                       title: post.title,
                       content: post.content,
+                      image_url: post.image_url
                     })
             .eq('id', params.id)
     
@@ -50,7 +51,6 @@ const EditPost = () => {
             window.location = '/hobby-hub/'
         } catch (error) {
             alert('Error updating post.');
-
         }
     };
 
@@ -61,10 +61,13 @@ const EditPost = () => {
                 <h1>Edit Your Post</h1>
                 <form className='form' onSubmit={handleSubmit}>
                     <label htmlFor="title">Post Title:</label>
-                    <input type="text" id="title" name="title" value={post.title} onChange={handleChange} required />
+                    <input type="text" id="title" name="title" value={post.title} onChange={handleChange} />
                     <br />
                     <label htmlFor="content">Post Content:</label>
-                    <input type="text" id="content" name="content" value={post.content} onChange={handleChange} required />
+                    <input type="text" id="content" name="content" value={post.content} onChange={handleChange} />
+                    <br />
+                    <label htmlFor="image_url">Post Image:</label>
+                    <input type="text" id="image_url" name="image_url" value={post.image_url || ''} placeholder='Image URL (optional)' onChange={handleChange} />
                     <br />
                     <input className='button button-submit' type="submit" value="Submit" />
                 </form>

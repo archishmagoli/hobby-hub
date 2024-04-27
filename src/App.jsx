@@ -15,7 +15,6 @@ function App() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      console.log(searchTerm);
         const { data, error } = searchTerm === null || searchTerm === '' ?
           await supabase
           .from('posts')

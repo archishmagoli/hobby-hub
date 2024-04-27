@@ -25,7 +25,8 @@ const CreatePost = () => {
                 .from('posts')
                 .insert({
                     title: post.title,
-                    content: post.content
+                    content: post.content,
+                    image_url: post.image_url
                 });
     
             if (error) {
@@ -49,9 +50,12 @@ const CreatePost = () => {
                 <br />
 
                 <label htmlFor="content">Post Content:</label>
-                <input type="text" id="content" name="content" placeholder='Content (optional)' onChange={handleChange} required />
+                <input type="text" id="content" name="content" placeholder='Content (optional)' onChange={handleChange} />
 
                 <br />
+
+                <label htmlFor="image_url">Post Image:</label>
+                <input type="text" id="image_url" name="image_url" placeholder='Image URL (optional)' onChange={handleChange} />
 
                 <input className='button button-submit' type="submit" value="Submit" />
             </form>
