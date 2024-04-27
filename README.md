@@ -32,7 +32,7 @@ The following **optional** features are implemented:
 - [ ] Users can upload images directly from their local machine as an image file
 
 ## Video Walkthrough
-Here's a walkthrough of implemented user stories: (to be added)
+<a href='https://drive.google.com/file/d/1XenxldvyQsBERXj8c1N-Vt9oyrJxUn07/view?usp=sharing'>Here's a walkthrough</a> of implemented user stories.
 
 ## Notes
 I really enjoyed putting together all of my knowledge from WEB102 in this project!
